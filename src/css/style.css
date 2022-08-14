@@ -22,14 +22,15 @@ img {
 
 .search-form {
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 50px;
-    padding-top: 15px;
     background-color: rgb(128, 128, 234);
 }
 
 input {
-    margin: 0 auto 0 50%;
     width: 200px;
     height: 30px;
     border-radius: 5px;
