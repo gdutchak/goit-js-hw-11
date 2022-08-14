@@ -76,6 +76,11 @@ function renderPage(e) {
     Notify.success(`Hooray! We found ${data.totalHits} images.`);
     showImage(data.hits)
     new SimpleLightbox('.gallery a', { /* options */ });
+    const { height: cardHeight } = refs.imageRef.firstElementChild.getBoundingClientRect();
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: "smooth",
+    })
   }).catch(error => Notify.failure(error.message))
 }
 refs.form.addEventListener("submit", (e) => {
@@ -90,5 +95,13 @@ refs.button.addEventListener('click', (e) => {
   SimpleLightbox.refresh()
 })
 
+// const { height: cardHeight } = document
+//   .querySelector(".gallery")
+//   .firstElementChild.getBoundingClientRect();
+
+// window.scrollBy({
+//   top: cardHeight * 2,
+//   behavior: "smooth",
+// });
 
 
