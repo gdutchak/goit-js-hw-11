@@ -3,6 +3,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const axios = require('axios').default;
 import './css/style.css';
+import simpleLightbox from "simplelightbox";
 
 const refs = {
   form: document.querySelector(".search-form"),
@@ -44,6 +45,7 @@ function createImage(item) {
     </p>
   </div>
 </div>`
+  new SimpleLightbox('.gallery a', { /* options */ });
 }
 
 function showImage(value) {
