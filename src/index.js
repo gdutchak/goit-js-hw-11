@@ -15,9 +15,9 @@ let imagePerPage = 40;
 
 refs.button.classList.add('visually-hidden')
 
-function searchImage(name) {
+async function searchImage(name) {
   const API = '29165116-db33726688e81f885d73ac474';
-  return fetch(`https://pixabay.com/api/?key=${API}&q=${name}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${imagePerPage}`)
+  return await fetch(`https://pixabay.com/api/?key=${API}&q=${name}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${imagePerPage}`)
     .then(responsive => {
       if (responsive.ok) { return responsive.json() }
       throw new Error("Sorry, there are no images matching your search query. Please try again.")
@@ -61,8 +61,10 @@ function renderPage(e) {
     if (data.hits.length === 0) {
       throw new Error("Sorry, there are no images matching your search query. Please try again.", { timeout: 1500 })
     }
-
-    if (page > allResult) {
+    if (data.totalHits > imagePerPage) {
+      refs.button.classList.remove('visually-hidden')
+    }
+    if (page > allResult && data.totalHits > imagePerPage) {
       refs.button.classList.add('visually-hidden')
       Notify.info("We're sorry, but you've reached the end of search results.");
     }
@@ -72,7 +74,6 @@ function renderPage(e) {
   }).catch(error => Notify.failure(error.message))
 }
 refs.form.addEventListener("submit", (e) => {
-  refs.button.classList.remove('visually-hidden')
   page = 1;
   refs.imageRef.innerHTML = ''
   renderPage(e)
