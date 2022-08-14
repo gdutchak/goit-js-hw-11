@@ -1,9 +1,9 @@
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const axios = require('axios').default;
 import './css/style.css';
-import simpleLightbox from "simplelightbox";
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+import simpleLightbox from 'simplelightbox';
 
 const refs = {
   form: document.querySelector(".search-form"),
@@ -45,7 +45,6 @@ function createImage(item) {
     </p>
   </div>
 </div>`
-  new SimpleLightbox('.gallery a', { /* options */ });
 }
 
 function showImage(value) {
@@ -73,6 +72,7 @@ function renderPage(e) {
 
     Notify.success(`Hooray! We found ${data.totalHits} images.`);
     showImage(data.hits)
+    new SimpleLightbox('.gallery a', { /* options */ });
   }).catch(error => Notify.failure(error.message))
 }
 refs.form.addEventListener("submit", (e) => {
@@ -84,5 +84,8 @@ refs.form.addEventListener("submit", (e) => {
 refs.button.addEventListener('click', (e) => {
   page += 1;
   renderPage(e)
+  SimpleLightbox.refresh()
 })
+
+
 
