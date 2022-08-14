@@ -16,13 +16,15 @@ let imagePerPage = 40;
 
 refs.button.classList.add('visually-hidden')
 
+
 async function searchImage(name) {
-  const API = '29165116-db33726688e81f885d73ac474';
-  return await fetch(`https://pixabay.com/api/?key=${API}&q=${name}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${imagePerPage}`)
-    .then(responsive => {
-      if (responsive.ok) { return responsive.json() }
-      throw new Error("Sorry, there are no images matching your search query. Please try again.")
-    })
+  try {
+    const API = '29165116-db33726688e81f885d73ac474';
+    const response = await axios.get(`https://pixabay.com/api/?key=${API}&q=${name}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${imagePerPage}`);
+    return response
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 function createImage(item) {
@@ -57,7 +59,8 @@ function renderPage(e) {
   let valueEl = refs.form.elements['searchQuery'].value;
   refs.input.value = '';
 
-  searchImage(valueEl).then(data => {
+  searchImage(valueEl).then(response => {
+    const { data } = response;
     let allResult = data.totalHits / imagePerPage
     if (data.hits.length === 0) {
       throw new Error("Sorry, there are no images matching your search query. Please try again.", { timeout: 1500 })

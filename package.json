@@ -25,6 +25,7 @@
     "axios": "^0.27.2",
     "buffer": "^6.0.3",
     "hbs": "^4.2.0",
+    "infinite-scroll": "^4.0.1",
     "notiflix": "^3.2.5",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
