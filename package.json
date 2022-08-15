@@ -4,7 +4,7 @@
   "description": "",
   "homepage": "https://gdutchak/goit-js-hw-11",
   "scripts": {
-    "start": "parcel src/*.html --port 5555",
+    "start": "parcel src/*.html --port 5522",
     "build": "parcel build src/*.html --public-url /goit-js-hw-11/"
   },
   "repository": {
@@ -25,7 +25,6 @@
     "axios": "^0.27.2",
     "buffer": "^6.0.3",
     "hbs": "^4.2.0",
-    "infinite-scroll": "^4.0.1",
     "notiflix": "^3.2.5",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
