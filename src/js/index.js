@@ -2,12 +2,16 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import '../css/style.css';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
-import refs from './refs';
 import Create from './create';
 import searchImage from './searchImage';
 
 
-
+const refs = {
+  form: document.querySelector(".search-form"),
+  imageRef: document.querySelector(".gallery-list"),
+  button: document.querySelector(".load-more"),
+  input: document.querySelector('input')
+}
 
 let page = 1;
 let imagePerPage = 40;
