@@ -14,6 +14,7 @@ const refs = {
 
 let page = 1;
 let imagePerPage = 40;
+let nameSearch = '';
 refs.button.classList.add('visually-hidden')
 
 
@@ -22,14 +23,13 @@ function showImage(value) {
   refs.imageRef.insertAdjacentHTML("beforeend", result)
 }
 
-function renderPage(e) {
+function renderPage(e, name) {
   e.preventDefault();
-  let valueEl = refs.form.elements['searchQuery'].value;
-
-  searchImage(valueEl, page, imagePerPage).then(response => {
+  searchImage(name, page, imagePerPage).then(response => {
     const { data } = response;
     let allResult = data.totalHits / imagePerPage
     if (data.hits.length === 0) {
+      refs.button.classList.add('visually-hidden')
       throw new Error("Sorry, there are no images matching your search query. Please try again.", { timeout: 1500 })
     }
     if (page > allResult && page > 1) {
@@ -54,14 +54,19 @@ function renderPage(e) {
 refs.form.addEventListener("submit", (e) => {
   page = 1;
   refs.imageRef.innerHTML = ''
+  let valueEl = refs.form.elements['searchQuery'].value;
+  nameSearch = valueEl;
   if (refs.input.value !== '') {
-    renderPage(e)
+    renderPage(e, nameSearch)
   }
+  refs.form.elements['searchQuery'].value = '';
+  refs.button.classList.add('visually-hidden')
 })
 
 refs.button.addEventListener('click', (e) => {
   page += 1;
-  renderPage(e);
+  renderPage(e, nameSearch);
+
 })
 
 
